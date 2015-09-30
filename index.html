@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script src="assets/jquery.js"></script>
+    <script src="lib/utils.js"></script>
+    <script src="lib/surveyObject.js"></script>
+    <script src="lib/checkBox.js"></script>
+    <script src="lib/dropDown.js"></script>
+    <script src="lib/radioButton.js"></script>
+    <script src="lib/openEnded.js"></script>
+
+    <form class="">
+
+      <span>What are your skills?</span>
+      <br>
+      <label><input type="checkbox" name="skills" value="Ruby"> Ruby </label><br>
+      <label><input type="checkbox" name="skills" value="Javascript"> Javascript </label><br>
+
+      <br>
+      <br>
+
+      <span>Radio Button</span>
+      <br>
+      <input type="radio" name="sex" value="male">Male
+      <br>
+      <input type="radio" name="sex" value="female">Female
+
+
+
+      <br>
+      <br>
+
+      <span>Residence</span>
+      <br>
+      <select name="residence">
+        <option disabled selected style='display:none'>Where do you live?</option>
+        <option value="Blooming Grassland">Blooming Grassland</option>
+        <option value="Desolate Swamp">Desolate Swamp</option>
+        <option value="Ethereal Island">Ethereal Island</option>
+        <option value="Misty Forest">Misty Forest</option>
+        <option value="Parched Woodland">Parched Woodland</option>
+        <option value="Windy Valley">Windy Valley</option>
+      </select>
+
+      <br>
+      <br>
+
+
+      <span>Open-Ended</span>
+      <br>
+      <input type="text" name='open-ended' value='' placeholder="Your current occupation">
+
+      <br><br>
+
+
+    </form>
+
+    <button class="submit-survey">Submit Survey</button>
+
+
+  </body>
+</html>
+
+
+<script type="text/javascript">
+  $('button.submit-survey').click(function() {
+    $("form").serializeArray().forEach(function(input) {
+      console.log(input.name + ": " + input.value);
+    })
+  })
+
+</script>
