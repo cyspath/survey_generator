@@ -60,12 +60,14 @@
   })
 
   // creates new survey
-  var yourSurvey = new Survey.YourSurvey()
+  var yourSurvey = new Survey.YourSurvey();
+  var id = 1;
   //adds current question to your survey when add question button is clicked
   $('.add-item').click(function() {
     var selections = []
     $('.option').each(function(i, option) { selections.push($(option).val()) })
-    yourSurvey.add($('select').val(), $('.question').val(), selections)
+    yourSurvey.add($('select').val(), $('.question').val(), selections, id)
+    id += 1;
   })
 
 
