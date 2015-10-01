@@ -3,9 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-  </head>
-  <body>
-
     <script src="assets/jquery.js"></script>
     <script src="lib/utils.js"></script>
     <script src="lib/surveyObject.js"></script>
@@ -14,11 +11,13 @@
     <script src="lib/radioButton.js"></script>
     <script src="lib/openEnded.js"></script>
     <script src="lib/yourSurvey.js"></script>
+  </head>
+  <body>
 
 
     <h1>Welcome to Michael's Survey Generator</h1>
 
-    <span>Choose a type a survey: </span>
+    <span>Choose a survey type: </span>
     <select name="type" class="survey-type">
       <option value="Open Ended">Open Ended</option>
       <option value="Drop Down">Drop Down</option>
@@ -41,6 +40,14 @@
     <br><br>
     <button class='print-current-survey-to-console'>Print Current Survey Objects to Console</button>
 
+    <br><br>
+    <button class="take-survey">Take Survey!</button>
+    <br><br>
+
+    <form>
+      <div class="survey-items-container"></div>
+    </form>
+
   </body>
 </html>
 
@@ -56,7 +63,9 @@
   var yourSurvey = new Survey.YourSurvey()
   //adds current question to your survey when add question button is clicked
   $('.add-item').click(function() {
-    yourSurvey.add($('select').val(), $('.question').val(), "cool")
+    var selections = []
+    $('.option').each(function(i, option) { selections.push($(option).val()) })
+    yourSurvey.add($('select').val(), $('.question').val(), selections)
   })
 
 
@@ -67,6 +76,7 @@
     })
   })
 
+  // adds extra options textfield on click
   $(document).on('click', '.add-option', function() {
     var option = "<input class='option' type='text' placeholder='new option item...'>"
     var button = '<br><button class="add-option"> + Add an option</button>'
@@ -74,8 +84,10 @@
     $('.current-question').append(option, button)
   });
 
-
-
+  // take survey
+  $('.take-survey').click(function(){
+    yourSurvey.takeSurvey();
+  })
 
 
 </script>
