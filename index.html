@@ -52,22 +52,51 @@
 </html>
 
 <script type="text/javascript">
+  // checks weather survey is filled with a question and selections
+  function checkQuestionFilled() {
+    if ($('.question').val() === "") {
+      alert("Your question cannot be blank!")
+      return false;
+    }
+    return true;
+  }
+
+  // checks if all options are filled before adding a new option
+  function checkOptionsFilled() {
+    var result = true;
+    $('input.option').each(function (i, option) {
+      if ($(option).val() === "") {
+        alert("Please finish an option before adding more.");
+        result = false;
+      }
+    })
+    return result;
+  }
+
   // changes survey type will trigger a different type of survey to be added
-  $('.survey-type').change(function() {
+  function changeSurveyType() {
     var type = $('select').val();
     var domElement = $('.current-question')
     Survey.Utils.renderInputs(type, domElement)
-  })
+  }
+  $('.survey-type').change(changeSurveyType)
 
   // creates new survey
   var yourSurvey = new Survey.YourSurvey();
   var id = 1;
+
   //adds current question to your survey when add question button is clicked
   $('.add-item').click(function() {
+    if (checkQuestionFilled() === false) { return; }
+    if (checkOptionsFilled() === false) { return; }
+
     var selections = []
     $('.option').each(function(i, option) { selections.push($(option).val()) })
     yourSurvey.add($('select').val(), $('.question').val(), selections, id)
     id += 1;
+    //reset type to open-ended
+    $('.survey-type').val('Open Ended')
+    changeSurveyType()
   })
 
 
