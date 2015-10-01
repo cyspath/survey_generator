@@ -53,18 +53,18 @@
 
 <script type="text/javascript">
   // checks weather survey is filled with a question and selections
-  function checkQuestionFilled() {
-    if ($('.question').val() === "") {
+  function checkQuestionFilled(input) {
+    if (input.val() === "") {
       alert("Your question cannot be blank!")
       return false;
     }
     return true;
   }
 
-  // checks if all options are filled before adding a new option
-  function checkOptionsFilled() {
+  // pass in jQuery Object, checks if exist survey options are all filled
+  function checkOptionsFilled(input) {
     var result = true;
-    $('input.option').each(function (i, option) {
+    input.each(function (i, option) {
       if ($(option).val() === "") {
         alert("Please finish an option before adding more.");
         result = false;
@@ -87,8 +87,8 @@
 
   //adds current question to your survey when add question button is clicked
   $('.add-item').click(function() {
-    if (checkQuestionFilled() === false) { return; }
-    if (checkOptionsFilled() === false) { return; }
+    if (checkQuestionFilled($('input.question')) === false) { return; }
+    if (checkOptionsFilled($('input.option')) === false) { return; }
 
     var selections = []
     $('.option').each(function(i, option) { selections.push($(option).val()) })
@@ -97,14 +97,6 @@
     //reset type to open-ended
     $('.survey-type').val('Open Ended')
     changeSurveyType()
-  })
-
-
-  $('.print-current-survey-to-console').click(function() {
-    yourSurvey.list.forEach(function(el) {
-      console.log(el);
-      console.log(el.args);
-    })
   })
 
   // adds extra options textfield on click
@@ -117,6 +109,7 @@
 
   // take survey
   $('.take-survey').click(function(){
+    $('.survey-items-container').empty()
     $('.survey-items-container').append("<h2>Your Survey<h2>")
     yourSurvey.takeSurvey();
   })
