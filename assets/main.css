@@ -1,0 +1,61 @@
+body {
+  color: #1d1017;
+  text-align: center;
+  font-family: 'Lucida Grande', Verdana, sans-serif;
+  background-image: url(http://distinctionjewelry.com/info/wp-content/uploads/2013/01/blurred-background-13-2000x1250.jpg);
+}
+
+h1, h2 {
+  margin-top: 5%;
+  margin-bottom: 3%;
+  text-shadow: 1px 1px 0px rgba(0,0,0,0.1), 1px -1px 0px rgba(0,0,0,0.1), -1px 1px 0px rgba(0,0,0,0.2);
+}
+
+span, input, select, option {
+  font-size: 20px;
+}
+ul {
+  background-color: #BEE76E;
+  width: 600px;
+  margin: 0 auto;
+  text-align: left;
+  border-radius: 25px;
+  border: 2px solid #8AC007;
+  padding: 20px;
+}
+
+li {
+  list-style: none;
+  padding: 5px;
+}
+
+
+button {
+  margin: 0 auto;
+  display: block;
+  background-color: #1984c3;
+  color: #fff;
+  font-size: 20px;
+  padding: 10px 20px;
+
+  border-radius: 8px;
+  border-bottom: 5px solid #0f5177;
+}
+
+button:hover {
+  cursor: hand;
+  cursor: pointer;
+  background-color: #55a5d2;
+}
+
+button:active {
+  position: relative;
+  background-color: #1e9feb;
+  top: 5px;
+  margin-top: 5px;
+  border-bottom: 0px solid #0f5177;
+}
+
+button:focus {
+  outline: none;
+}
