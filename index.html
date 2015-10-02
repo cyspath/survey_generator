@@ -38,16 +38,12 @@
       <br><br>
       <div class="current-question">
 
-        <input class="question" type="text" name='open-ended' value='' placeholder="Enter a Question...">
-        <br><br>
+        <input class="question" type="text" name='open-ended' size='35' placeholder="Enter a Question...">
       </div>
 
-      <br><br>
       <button class="add-item">Add this question to your survey</button>
 
-      <br><br>
       <button class="take-survey">Done! (Generate Survey)</button>
-      <br><br>
     </div>
 
     <form class="step-2">
@@ -117,6 +113,7 @@
 
   // generate to take survey
   $('.take-survey').click(function(){
+    if (yourSurvey.list.length === 0) { return alert('No questions have been added yet!'); }
     $('.survey-items-container').empty();
     $('.step-1').empty();
     $('.survey-items-container').append("<h2>Step 2: Take Your Survey<h2>");
@@ -134,6 +131,7 @@
         el.printAnswers();
       });
       $('.survey-items-container').empty();
+      $('.answers').append("<button class='restart-btn'>Create Another Survey</button>")
 
     } else {
       alert("Please answer all questions before submitting.")
@@ -152,6 +150,7 @@
     return allAnswered;
   }
 
-
+  // restart
+  $(document).on('click', '.restart-btn', function() { location.reload(); })
 
 </script>

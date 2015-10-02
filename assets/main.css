@@ -7,12 +7,14 @@ body {
 
 h1, h2 {
   margin-top: 5%;
-  margin-bottom: 3%;
+  margin-bottom: 5%;
   text-shadow: 1px 1px 0px rgba(0,0,0,0.1), 1px -1px 0px rgba(0,0,0,0.1), -1px 1px 0px rgba(0,0,0,0.2);
 }
 
 span, input, select, option {
   font-size: 20px;
+  padding: 5px;
+  margin: 5px;
 }
 ul {
   background-color: #BEE76E;
@@ -29,9 +31,32 @@ li {
   padding: 5px;
 }
 
+.answer-question {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.answer-answer {
+  font-size: 18px;
+}
+
+.step-3 {
+  width: 450px;
+  min-height: 50px;
+  margin: 0 auto;
+}
+
+/*.step-3 div{
+  text-align: left;
+}*/
+
+.answer-answer {
+  margin-left: 5%;
+}
 
 button {
   margin: 0 auto;
+  margin-top: 20px;
   display: block;
   background-color: #1984c3;
   color: #fff;
