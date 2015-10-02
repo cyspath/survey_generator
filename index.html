@@ -2,7 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Survey Engine</title>
+    <link rel="stylesheet" type="text/css" href="assets/main.css">
     <script src="assets/jquery.js"></script>
     <script src="lib/utils.js"></script>
     <script src="lib/surveyObject.js"></script>
@@ -15,38 +16,45 @@
   <body>
 
 
-    <h1>Welcome to Michael's Survey Generator</h1>
+    <h1>Michael's Survey Engine</h1>
+    <ul>
+      <li>First select a question type, enter a question and answer options</li>
+      <li>Next, add this question to your survey</li>
+      <li>Once you have added all your questions, go ahead and take your survey</li>
+      <li>After taking your survey, click "Summary" to see your answers</li>
+    </ul>
 
-    <span>Choose a survey type: </span>
-    <select name="type" class="survey-type">
-      <option value="Open Ended">Open Ended</option>
-      <option value="Drop Down">Drop Down</option>
-      <option value="Radio Button">Radio Button</option>
-      <option value="Check Box">Check Box</option>
-    </select>
+    <div class="step-1">
 
-    <br><br>
-    <div class="current-question">
+      <h2>Step 1: Generate a Survey</h2>
+      <span>Choose a survey type: </span>
+      <select name="type" class="survey-type">
+        <option value="Open Ended">Open Ended</option>
+        <option value="Drop Down">Drop Down</option>
+        <option value="Radio Button">Radio Button</option>
+        <option value="Check Box">Check Box</option>
+      </select>
 
-      <input class="question" type="text" name='open-ended' value='' placeholder="Enter a Question...">
+      <br><br>
+      <div class="current-question">
+
+        <input class="question" type="text" name='open-ended' value='' placeholder="Enter a Question...">
+        <br><br>
+      </div>
+
+      <br><br>
+      <button class="add-item">Add this question to your survey</button>
+
+      <br><br>
+      <button class="take-survey">Done! (Generate Survey)</button>
       <br><br>
     </div>
 
-    <br><br>
-    <button class="add-item">Add Question to Your Survey</button>
-
-    <br><br>
-    <button class='print-current-survey-to-console'>Print Current Survey Objects to Console</button>
-
-    <br><br>
-    <button class="take-survey">Take Survey!</button>
-    <br><br>
-
-    <form>
+    <form class="step-2">
       <div class="survey-items-container"></div>
     </form>
 
-    <div class="answers"></div>
+    <div class="step-3 answers"></div>
 
   </body>
 </html>
@@ -92,34 +100,35 @@
 
     var selections = []
     $('.option').each(function(i, option) { selections.push($(option).val()) })
-    yourSurvey.add($('select').val(), $('.question').val(), selections, id)
+    yourSurvey.add($('select').val(), $('.question').val(), selections, id);
     id += 1;
     //reset type to open-ended
-    $('.survey-type').val('Open Ended')
-    changeSurveyType()
+    $('.survey-type').val('Open Ended');
+    changeSurveyType();
   })
 
   // adds extra options textfield on click
   $(document).on('click', '.add-option', function() {
     var option = "<input class='option' type='text' placeholder='new option item...'>"
     var button = '<br><button class="add-option"> + Add an option</button>'
-    $('.add-option').remove()
-    $('.current-question').append(option, button)
+    $('.add-option').remove();
+    $('.current-question').append(option, button);
   });
 
   // generate to take survey
   $('.take-survey').click(function(){
-    $('.survey-items-container').empty()
-    $('.survey-items-container').append("<h2>Your Survey<h2>")
+    $('.survey-items-container').empty();
+    $('.step-1').empty();
+    $('.survey-items-container').append("<h2>Step 2: Take Your Survey<h2>");
     yourSurvey.generateSurvey();
-    $('.survey-items-container').append("<button class='submit-finished-survey'>Submit!</button>")
+    $('.survey-items-container').append("<button class='submit-finished-survey'>Submit!</button>");
   })
 
   // submit answered survey, and if completed will print results to page
   $('form').submit(function (event) {
     event.preventDefault();
     if (allQuestionsAnswered() === true) {
-      $('.answers').append("<h2>Your Answers</h2>")
+      $('.answers').append("<h2>Step 3: Summary</h2>")
       yourSurvey.list.forEach(function(el) {
         el.setAnswer();
         el.printAnswers();
