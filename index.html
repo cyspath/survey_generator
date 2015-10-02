@@ -34,8 +34,6 @@
 
     <br><br>
     <button class="add-item">Add Question to Your Survey</button>
-    <br><br>
-    <a href="yourSurvey.html">Take Survey</a>
 
     <br><br>
     <button class='print-current-survey-to-console'>Print Current Survey Objects to Console</button>
@@ -47,6 +45,8 @@
     <form>
       <div class="survey-items-container"></div>
     </form>
+
+    <div class="answers"></div>
 
   </body>
 </html>
@@ -66,7 +66,7 @@
     var result = true;
     input.each(function (i, option) {
       if ($(option).val() === "") {
-        alert("Please finish an option before adding more.");
+        alert("Please finish filling out options before adding.");
         result = false;
       }
     })
@@ -107,12 +107,42 @@
     $('.current-question').append(option, button)
   });
 
-  // take survey
+  // generate to take survey
   $('.take-survey').click(function(){
     $('.survey-items-container').empty()
     $('.survey-items-container').append("<h2>Your Survey<h2>")
-    yourSurvey.takeSurvey();
+    yourSurvey.generateSurvey();
+    $('.survey-items-container').append("<button class='submit-finished-survey'>Submit!</button>")
   })
+
+  // submit answered survey, and if completed will print results to page
+  $('form').submit(function (event) {
+    event.preventDefault();
+    if (allQuestionsAnswered() === true) {
+      $('.answers').append("<h2>Your Answers</h2>")
+      yourSurvey.list.forEach(function(el) {
+        el.setAnswer();
+        el.printAnswers();
+      });
+      $('.survey-items-container').empty();
+
+    } else {
+      alert("Please answer all questions before submitting.")
+    }
+  })
+
+
+  // checks if all questions are answered
+  function allQuestionsAnswered() {
+    var allAnswered = true;
+    yourSurvey.list.forEach(function(el) {
+      if (el.answered() === false) {
+        allAnswered = false;
+      }
+    });
+    return allAnswered;
+  }
+
 
 
 </script>
